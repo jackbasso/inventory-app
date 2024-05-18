@@ -12,17 +12,22 @@
 
 Code . -r (open the actual directory reusing the same window)
 
+EPISODE 1:
+
 - Darkmode
   https://ui.shadcn.com/docs/dark-mode/next
   npm install next-themes
   Create a ThemeProvider.tsx inside the Provider folder and copy the code from Shadcn 15:00
-
 - Footer
-
 - Header
-
 - Shop Header
-
 - Layout (Front/BackOffice)
-
 - Deploy
+
+EPISODE 2:
+-Login Page
+-Signup Page
+-Forgot Password
+-Change Password
+-Verify Email
+-Integrate Dashboard from Shad
