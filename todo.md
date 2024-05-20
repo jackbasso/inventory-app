@@ -31,3 +31,12 @@ EPISODE 2:
 -Change Password
 -Verify Email
 -Integrate Dashboard from Shad
+-Charts using tremor.so
+
+EPISODE 3:
+-Identify the Modules
+-Identify Pages
+-Group Pages
+-Add Dropdown on the Sidebar
+-Start on Design Some
+-Deploy

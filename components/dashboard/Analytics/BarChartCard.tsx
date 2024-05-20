@@ -81,7 +81,7 @@ export default function BarChartCard() {
   const [showComparison, setShowComparison] = useState(false);
   return (
     <>
-      <Card className="sm:mx-auto sm:max-w-2xl">
+      <Card className="sm:mx-auto sm:max-w-2xl rounded-md">
         <h3 className="ml-1 mr-1 font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
           Sales overview
         </h3>
