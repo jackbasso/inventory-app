@@ -9,8 +9,9 @@ import {
   FingerPrintIcon,
   SquaresPlusIcon,
 } from "@heroicons/react/24/outline";
-import { LayoutGrid, Plus } from "lucide-react";
+import { Home, LayoutGrid, Plus } from "lucide-react";
 import Link from "next/link";
+import { sidebarLinks } from "@/config/sidebar";
 
 const menu = [
   {
@@ -68,26 +69,45 @@ export default function QuickAccessMenuButton() {
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 translate-y-1"
       >
-        <Popover.Panel className="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
-          <div className="w-screen max-w-md flex-auto overflow-hidden rounded-md bg-white dark:bg-slate-800 text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
-            <div className="p-4 grid grid-cols-3">
-              {menu.map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <div key={i} className="">
-                    <div className="flex text-gray-500">
-                      <Icon className="w-4 h-4 mr-1" />
-                      <h2 className="uppercase text-sm">{item.title}</h2>
-                    </div>
-                    {item.links.map((item) => (
-                      <Link key={item.name} href={item.href} className="flex items-center px-2 py-2">
+        <Popover.Panel className="absolute left-0 z-10 mt-5 flex w-screen max-w-max -translate-x-2/3 px-4">
+          <div className="w-screen max-w-md flex-auto overflow-hidden rounded-md bg-white dark:bg-slate-800 text-sm leading-6 shadow-lg ring-1 ring-gray-900/5 px-4">
+            <div className="p-4 grid grid-cols-2 lg:grid-cols-3">
+              <div>
+                <div className="flex text-gray-500">
+                  <Home className="w-4 h-4 mr-1" />
+                  <h2 className="uppercase text-sm">General</h2>
+                </div>
+                {sidebarLinks
+                  .filter((item) => !item.dropdown && item.href !== "/dashboard")
+                  .map((item, i) => {
+                    return (
+                      <Link key={i} href={item.href ?? "#"} className="flex items-center px-2 py-2">
                         <Plus className="w-3 h-3 mr-1" />
-                        <span className="text-xs">{item.name}</span>
+                        <span className="text-xs">{item.title}</span>
                       </Link>
-                    ))}
-                  </div>
-                );
-              })}
+                    );
+                  })}
+              </div>
+              {sidebarLinks
+                .filter((item) => item.dropdown)
+                .map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={i} className="">
+                      <div className="flex text-gray-500">
+                        <Home className="w-4 h-4 mr-1" />
+                        <h2 className="uppercase text-sm">{item.title}</h2>
+                      </div>
+                      {item.dropdownMenu &&
+                        item.dropdownMenu.map((item) => (
+                          <Link key={item.href} href={item.href} className="flex items-center px-2 py-2">
+                            <Plus className="w-3 h-3 mr-1" />
+                            <span className="text-xs">{item.title}</span>
+                          </Link>
+                        ))}
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </Popover.Panel>

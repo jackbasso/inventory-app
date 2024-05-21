@@ -1,18 +1,44 @@
+"use client";
 import Link from "next/link";
-import { Bell, Home, LineChart, Package, Package2, ShoppingCart, Users } from "lucide-react";
+import {
+  BaggageClaim,
+  BarChart4,
+  Bell,
+  Cable,
+  ChevronDown,
+  ChevronUp,
+  CircleDollarSign,
+  FolderTree,
+  Home,
+  LineChart,
+  Package,
+  Package2,
+  Power,
+  Settings,
+  Store,
+  Users,
+} from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useState } from "react";
+
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import Logo from "../global/Logo";
+import { sidebarLinks } from "@/config/sidebar";
 
 export default function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
   return (
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Package2 className="h-6 w-6" />
-            <span className="">Acme Inc</span>
+            <Logo />
           </Link>
           <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
             <Bell className="h-4 w-4" />
@@ -21,56 +47,70 @@ export default function Sidebar() {
         </div>
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            <Link
-              href="#"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-            >
-              <Home className="h-4 w-4" />
-              Dashboard
-            </Link>
-            <Link
-              href="#"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-            >
-              <ShoppingCart className="h-4 w-4" />
-              Orders
-              <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">6</Badge>
-            </Link>
-            <Link
-              href="#"
-              className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-            >
-              <Package className="h-4 w-4" />
-              Products{" "}
-            </Link>
-            <Link
-              href="#"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-            >
-              <Users className="h-4 w-4" />
-              Customers
-            </Link>
-            <Link
-              href="#"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-            >
-              <LineChart className="h-4 w-4" />
-              Analytics
-            </Link>
+            {sidebarLinks.map((item, i) => {
+              const Icon = item.icon;
+              const isHrefIncluded = item.dropdownMenu && item.dropdownMenu.some((link) => link.href === pathname);
+              return (
+                <div key={i}>
+                  {item.dropdown ? (
+                    <Collapsible>
+                      <CollapsibleTrigger
+                        onClick={() => setIsOpen(!isOpen)}
+                        className={cn(
+                          "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary w-full",
+                          isHrefIncluded && "bg-muted text-primary"
+                        )}
+                      >
+                        <Icon className="h-4 w-4" />
+                        {item.title}
+                        {!isOpen ? (
+                          <ChevronDown className="h-5 w-5 ml-auto flex shrink-0 items-center justify-center rounded-full" />
+                        ) : (
+                          <ChevronUp className="h-5 w-5 ml-auto flex shrink-0 items-center justify-center rounded-full" />
+                        )}
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="dark:bg-slate-950 rounded mt-1">
+                        {item.dropdownMenu &&
+                          item.dropdownMenu.map((item, i) => {
+                            return (
+                              <Link
+                                key={i}
+                                href={item.href}
+                                className={cn(
+                                  "ml-5 flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary",
+                                  pathname === item.href && "bg-muted text-primary"
+                                )}
+                              >
+                                {item.title}
+                                <Icon className="h-4 w-4" />
+                              </Link>
+                            );
+                          })}
+                      </CollapsibleContent>
+                    </Collapsible>
+                  ) : (
+                    <Link
+                      href={item.href ?? "#"}
+                      className={cn(
+                        "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary",
+                        pathname === item.href && "bg-muted text-primary"
+                      )}
+                    >
+                      <LineChart className="h-4 w-4" />
+                      {item.title}
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
           </nav>
         </div>
+
         <div className="mt-auto p-4">
-          <Card x-chunk="dashboard-02-chunk-0">
-            <CardHeader className="p-2 pt-0 md:p-4">
-              <CardTitle>Upgrade to Pro</CardTitle>
-              <CardDescription>Unlock all features and get unlimited access to our support team.</CardDescription>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-              <Button size="sm" className="w-full">
-                Upgrade
-              </Button>
-            </CardContent>
-          </Card>
+          <Button size="sm" className="w-full">
+            <Power className="h-4 w-4 mr-2" />
+            Logout
+          </Button>
         </div>
       </div>
     </div>
