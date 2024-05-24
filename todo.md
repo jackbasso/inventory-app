@@ -55,10 +55,10 @@ setup database in Prisma
 https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/mongodb/connect-your-database-typescript-mongodb
 -CREATE CATEGORY MODEL
 -DESIGN FORM AND FORM INPUTS
--REAC HOOK FORMS/ZOD
+
+EPISODE
+-REACT HOOK FORMS/ZOD
 -CREATE WITH SERVER ACTIONS
 -DESIGN OUR TABLE
 -FETCH THE RECORDS
 -DEPLOY
-
-55:15 debo copiar el form de Shadcn para new category

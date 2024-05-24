@@ -1,26 +1,38 @@
+"use client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
-export default function FormHeader() {
+type FormHeaderProps = {
+  title: string;
+  onClick: () => void;
+};
+export default function FormHeader({ title, onClick }: FormHeaderProps) {
+  const router = useRouter();
+
+  function goBack() {
+    router.back();
+  }
+
   return (
     <div className="flex items-center justify-between">
-      <Button variant="outline" size="icon" className="h-7 w-7">
+      <Button onClick={goBack} variant="outline" size="icon" className="h-7 w-7">
         <ChevronLeft className="h-4 w-4" />
         <span className="sr-only">Back</span>
       </Button>
       <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
-        Pro Controller
+        Create {title}
       </h1>
       <Badge variant="outline" className="ml-auto sm:ml-0">
         In stock
       </Badge>
       <div className="hidden items-center gap-2 md:ml-auto md:flex">
-        <Button variant="outline" size="sm">
+        <Button onClick={onClick} variant="outline" size="sm">
           Discard
         </Button>
-        <Button size="sm">Save Product</Button>
+        <Button size="sm">Save {title}</Button>
       </div>
     </div>
   );

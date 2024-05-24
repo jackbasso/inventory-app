@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, PlusCircle, Upload } from "lucide-react";
@@ -17,9 +18,13 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import FormHeader from "./FormHeader";
 
 export default function CategoryForm() {
+  async function saveCategory() {
+    alert("Clicked");
+  }
+
   return (
     <div>
-      <FormHeader />
+      <FormHeader title="Create Category" onClick={saveCategory} />
       <div className="grid grid-cols-12 gap-6 py-8">
         <div className="col-span-8">
           <Card x-chunk="">
