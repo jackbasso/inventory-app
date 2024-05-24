@@ -32,7 +32,7 @@ export const sidebarLinks: ISidebarLink[] = [
     dropdownMenu: [
       {
         title: "Categories",
-        href: "/dashboard/products",
+        href: "/dashboard/inventory/categories",
       },
       {
         title: "Brands",

@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Sidebar />
       <div className="flex flex-col">
         <Navbar />
-        {children}
+        <div className="py-8 px-6 max-w-4xl mx-auto w-full my-4">{children}</div>
       </div>
     </div>
   );

@@ -46,3 +46,19 @@ BUILD OUT THE SIDEBAR NAVIGATION
 NAVBAR (EVERYTHING RESPONSIVE)
 START BUILDING SOME PAGES AND MODULES
 DEPLOY
+
+EPISODE 5:
+-INSALL AND SET UP PRISMA AND MONGODB
+npm i prisma @prisma/client
+npx prisma init --datasource-provider mongodb
+setup database in Prisma
+https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/mongodb/connect-your-database-typescript-mongodb
+-CREATE CATEGORY MODEL
+-DESIGN FORM AND FORM INPUTS
+-REAC HOOK FORMS/ZOD
+-CREATE WITH SERVER ACTIONS
+-DESIGN OUR TABLE
+-FETCH THE RECORDS
+-DEPLOY
+
+55:15 debo copiar el form de Shadcn para new category
