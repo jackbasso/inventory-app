@@ -7,9 +7,8 @@ import React from "react";
 
 type FormHeaderProps = {
   title: string;
-  onClick: () => void;
 };
-export default function FormHeader({ title, onClick }: FormHeaderProps) {
+export default function FormHeader({ title }: FormHeaderProps) {
   const router = useRouter();
 
   function goBack() {
@@ -29,7 +28,7 @@ export default function FormHeader({ title, onClick }: FormHeaderProps) {
         In stock
       </Badge>
       <div className="hidden items-center gap-2 md:ml-auto md:flex">
-        <Button onClick={onClick} variant="outline" size="sm">
+        <Button onClick={goBack} variant="outline" size="sm">
           Discard
         </Button>
         <Button size="sm">Save {title}</Button>

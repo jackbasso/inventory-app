@@ -16,27 +16,47 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import FormHeader from "./FormHeader";
+import { useRouter } from "next/navigation";
 
 export default function CategoryForm() {
-  async function saveCategory() {
-    alert("Clicked");
+  const router = useRouter();
+  async function saveCategory(data: any = "Working") {
+    console.log("Clicked", data);
   }
 
   return (
-    <div>
-      <FormHeader title="Create Category" onClick={saveCategory} />
+    <form className="">
+      <FormHeader title="Category" />
       <div className="grid grid-cols-12 gap-6 py-8">
-        <div className="col-span-8">
+        <div className="col-span-full lg:col-span-8">
           <Card x-chunk="">
             <CardHeader>
-              <CardTitle>Product Details</CardTitle>
+              <CardTitle>Category Title</CardTitle>
               <CardDescription>Lipsum dolor sit amet, consectetur adipiscing elit</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-6">
                 <div className="grid gap-3">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" type="text" className="w-full" defaultValue="Gamer Gear Pro Controller" />
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium leading-6
+                    text-gray-900"
+                    >
+                      Category Title
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        className="block w-full rounded-md
+        border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400
+        focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm-leading-6"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="grid gap-3">
                   <Label htmlFor="description">Description</Label>
@@ -49,8 +69,15 @@ export default function CategoryForm() {
               </div>
             </CardContent>
           </Card>
+
+          <div className="flex items-center justify-between gap-2 py-4">
+            <Button onClick={() => router.back()} variant="outline" size="sm">
+              Discard
+            </Button>
+            <Button size="sm">Save Category</Button>
+          </div>
         </div>
-        <div className="col-span-4">
+        <div className="lg:col-span-4 col-span-full">
           <div className="grid auto-rows-max items-start gap-4">
             <Card>
               <CardHeader>
@@ -78,23 +105,7 @@ export default function CategoryForm() {
               <CardHeader>
                 <CardTitle>Product Images</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="grid gap-2">
-                  <Image
-                    alt="Product image"
-                    className="h-20 w-full rounded-md object-cover"
-                    height="300"
-                    src="/placeholder.svg"
-                    width="300"
-                  />
-                  <div className="grid grid-cols-3 gap-2">
-                    <button className="flex aspect-square w-full items-center justify-center rounded-md border border-dashed">
-                      <Upload className="h-4 w-4 text-muted-foreground" />
-                      <span className="sr-only">Upload</span>
-                    </button>
-                  </div>
-                </div>
-              </CardContent>
+              <CardContent></CardContent>
             </Card>
             <Card x-chunk="dashboard-07-chunk-5">
               <CardHeader>
@@ -110,7 +121,22 @@ export default function CategoryForm() {
             </Card>
           </div>
         </div>
+        <div className="grid gap-2">
+          <Image
+            alt="Product image"
+            className="h-20 w-full rounded-md object-cover"
+            height="300"
+            src="/placeholder.svg"
+            width="300"
+          />
+          <div className="grid grid-cols-3 gap-2">
+            <button className="flex aspect-square w-full items-center justify-center rounded-md border border-dashed">
+              <Upload className="h-4 w-4 text-muted-foreground" />
+              <span className="sr-only">Upload</span>
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </form>
   );
 }
