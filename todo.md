@@ -58,9 +58,10 @@ https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/
 
 EPISODE
 -REACT HOOK FORMS/ZOD
+-UPLOAD CATEGORY IMAGE => uploadthing.com/dashboard/hmtzjrl6di/api-keys 1:30 no lo hice debo crear cuenta con tarjeta
 -CREATE WITH SERVER ACTIONS
 -DESIGN OUR TABLE
 -FETCH THE RECORDS
 -DEPLOY
 
-59:25
+1:51

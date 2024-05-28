@@ -13,3 +13,16 @@ type MenuItem = {
   title: "Categories";
   href: "/dashboard/products";
 };
+
+export type CategoryProps = {
+  title: string;
+  slug: string;
+  description: string;
+  imageUrl: string;
+  boolean: boolean;
+};
+
+export type SelectOption = {
+  label: string;
+  value: number | string | boolean;
+};
