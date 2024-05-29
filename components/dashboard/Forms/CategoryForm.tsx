@@ -20,6 +20,8 @@ import { cn } from "@/lib/utils";
 import TextInput from "@/components/global/FormInputs/TextInput";
 import TextArea from "@/components/global/FormInputs/textArea";
 import { UploadButton } from "@/lib/uploadthing";
+import { generateSlug } from "@/lib/generateSlug";
+import { createCategory } from "@/actions/category";
 
 export default function CategoryForm() {
   const {
@@ -30,6 +32,7 @@ export default function CategoryForm() {
   } = useForm<CategoryProps>();
   const [imageUrl, setImageUrl] = useState("/placeholder.svg");
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<SelectOption | null>(null); //30:00 VIDEO6 https://www.npmjs.com/package/react-tailwindcss-select
   const options: SelectOption[] = [
     { value: true, label: "Active" },
@@ -42,7 +45,19 @@ export default function CategoryForm() {
   //   { value: false, label: "Disabled" },
   //];
   async function saveCategory(data: CategoryProps) {
-    console.log(data);
+    try {
+      setLoading(true);
+      console.log(data);
+      data.slug = generateSlug(data.title);
+      data.status = status?.value as boolean;
+      data.imageUrl = imageUrl;
+      await createCategory(data);
+      //Toast
+      //Reset
+      //Route
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleChange = (item: SelectOption) => {
@@ -85,8 +100,8 @@ export default function CategoryForm() {
                   <div className="grid gap-3">
                     <Select
                       primaryColor="blue"
-                      isSearchable
-                      isMultiple
+                      //isSearchable
+                      //isMultiple
                       value={status}
                       onChange={handleChange}
                       options={options}

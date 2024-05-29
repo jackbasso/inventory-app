@@ -19,7 +19,7 @@ export type CategoryProps = {
   slug: string;
   description: string;
   imageUrl: string;
-  boolean: boolean;
+  status: boolean;
 };
 
 export type SelectOption = {
