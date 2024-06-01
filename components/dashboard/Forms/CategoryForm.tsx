@@ -22,6 +22,10 @@ import TextArea from "@/components/global/FormInputs/textArea";
 import { UploadButton } from "@/lib/uploadthing";
 import { generateSlug } from "@/lib/generateSlug";
 import { createCategory } from "@/actions/category";
+import toast from "react-hot-toast";
+import SubmitButton from "@/components/global/FormInputs/SubmitButton";
+import ImageInput from "@/components/global/FormInputs/ImageInput";
+import { Options, SelectValue } from "react-tailwindcss-select/dist/components/type";
 
 export default function CategoryForm() {
   const {
@@ -33,10 +37,10 @@ export default function CategoryForm() {
   const [imageUrl, setImageUrl] = useState("/placeholder.svg");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<SelectOption | null>(null); //30:00 VIDEO6 https://www.npmjs.com/package/react-tailwindcss-select
-  const options: SelectOption[] = [
-    { value: true, label: "Active" },
-    { value: false, label: "Disabled" },
+  const [status, setStatus] = useState<any>(null); //1:04 VIDEO7 https://www.npmjs.com/package/react-tailwindcss-select
+  const options: Options = [
+    { value: "true", label: "Active" },
+    { value: "false", label: "Disabled" },
     //{ value: "Honeybee", label: "🐝 Honeybee" },
   ];
 
@@ -49,18 +53,22 @@ export default function CategoryForm() {
       setLoading(true);
       console.log(data);
       data.slug = generateSlug(data.title);
-      data.status = status?.value as boolean;
+      data.status = status && status.value == "true" ? true : false;
       data.imageUrl = imageUrl;
       await createCategory(data);
+      setLoading(false);
       //Toast
+      toast.success("Successfully toasted!");
       //Reset
+      reset();
       //Route
+      router.push("/dashboard/inventory/categories");
     } catch (error) {
       console.log(error);
     }
   }
 
-  const handleChange = (item: SelectOption) => {
+  const handleChange = (item: SelectValue) => {
     console.log("value:", item);
     setStatus(item);
   };
@@ -97,52 +105,19 @@ export default function CategoryForm() {
               </CardHeader>
               <CardContent>
                 <div className="grid gap-6">
-                  <div className="grid gap-3">
-                    <Select
-                      primaryColor="blue"
-                      //isSearchable
-                      //isMultiple
-                      value={status}
-                      onChange={handleChange}
-                      options={options}
-                    />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="overflow-hidden" x-chunk="dashboard-07-chunk-4">
-              <CardHeader>
-                <CardTitle>Category Image</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-2">
-                  <Image
-                    alt="Product image"
-                    className="h-40 w-full rounded-md object-cover"
-                    height="300"
-                    src={imageUrl}
-                    width="300"
+                  <Select
+                    primaryColor="blue"
+                    //isSearchable
+                    //isMultiple
+                    value={status}
+                    onChange={handleChange}
+                    options={options}
                   />
-                  <div className="grid grid-cols-3 gap-2">
-                    <div className="w-full ml-10 flex items-center justify-center">
-                      <UploadButton
-                        className="col-span-full"
-                        endpoint="categoryImage"
-                        onClientUploadComplete={(res) => {
-                          // Do something with the response
-                          console.log("Files: ", res);
-                          setImageUrl(res[0].url);
-                        }}
-                        onUploadError={(error: Error) => {
-                          // Do something with the error.
-                          alert(`ERROR! ${error.message}`);
-                        }}
-                      />
-                    </div>
-                  </div>
                 </div>
               </CardContent>
             </Card>
+            <ImageInput title="Category Image" imageUrl={imageUrl} setImageUrl={setImageUrl} endpoint="categoryImage" />
+            ``
             <Card x-chunk="dashboard-07-chunk-5">
               <CardHeader>
                 <CardTitle>Archive Product</CardTitle>
@@ -159,10 +134,10 @@ export default function CategoryForm() {
         </div>
       </div>
       <div className="flex items-center justify-between gap-2 py-4">
-        <Button onClick={() => router.back()} variant="outline" size="sm">
+        <Button type="button" onClick={() => router.back()} variant="outline">
           Discard
         </Button>
-        <Button size="sm">Save Category</Button>
+        <SubmitButton title="Save Category" loading={loading} />
       </div>
     </form>
   );

@@ -59,6 +59,7 @@ https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/
 EPISODE
 -REACT HOOK FORMS/ZOD
 -UPLOAD CATEGORY IMAGE => uploadthing.com/dashboard/hmtzjrl6di/api-keys 1:30 no lo hice debo crear cuenta con tarjeta
+-REACT HOT TOAST 2:05 (https://react-hot-toast.com/) - para mostrar alerta npm i react-hot-toast
 -CREATE WITH SERVER ACTIONS
 -DESIGN OUR TABLE
 -FETCH THE RECORDS

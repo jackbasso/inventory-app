@@ -16,3 +16,12 @@ export async function createCategory(data: CategoryProps) {
     return null;
   }
 }
+export async function getAllCategories() {
+  try {
+    const categories = await prisma.category.findMany();
+    return categories;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
