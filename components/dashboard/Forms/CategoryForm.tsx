@@ -101,7 +101,7 @@ export default function CategoryForm() {
           <div className="grid auto-rows-max items-start gap-4">
             <Card>
               <CardHeader>
-                <CardTitle>Product Status</CardTitle>
+                <CardTitle>Category Status</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-6">
@@ -112,6 +112,7 @@ export default function CategoryForm() {
                     value={status}
                     onChange={handleChange}
                     options={options}
+                    placeholder="Status"
                   />
                 </div>
               </CardContent>

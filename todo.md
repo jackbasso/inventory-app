@@ -56,7 +56,7 @@ https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/
 -CREATE CATEGORY MODEL
 -DESIGN FORM AND FORM INPUTS
 
-EPISODE
+EPISODE 6 AND 7:
 -REACT HOOK FORMS/ZOD
 -UPLOAD CATEGORY IMAGE => uploadthing.com/dashboard/hmtzjrl6di/api-keys 1:30 no lo hice debo crear cuenta con tarjeta
 -REACT HOT TOAST 2:05 (https://react-hot-toast.com/) - para mostrar alerta npm i react-hot-toast
@@ -65,4 +65,10 @@ EPISODE
 -FETCH THE RECORDS
 -DEPLOY
 
-2:04
+EPISODE 8
+DataTableComponents and DataTableColumns https://desishub-docs.vercel.app/programming-tutorials/nextjs/datatable
+-Integrating Data Table with Pagination
+IMPLEMENT IMPORT AND EXPORT FUNCTIONALITY
+DEPLOY
+
+video 8 33:20
