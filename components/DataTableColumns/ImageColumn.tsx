@@ -8,11 +8,11 @@ export default function ImageColumn({ row, accessorKey }: { row: any; accessorKe
   return (
     <div className="shrink-0">
       <Image
-        src={imageUrl}
-        width={500}
-        height={500}
         alt={`${accessorKey}`}
-        className="w-10 h-10 rounded-full object-cover"
+        className="aspect-square rounded-md object-cover"
+        height="64"
+        src={imageUrl ?? ""}
+        width="64"
       />
     </div>
   );

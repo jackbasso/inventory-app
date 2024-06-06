@@ -31,16 +31,21 @@ export const columns: ColumnDef<Category>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-  {
-    accessorKey: "title",
-    header: ({ column }) => <SortableColumn column={column} title="Title" />,
-  },
+
   {
     accessorKey: "imageUrl",
     header: "Category Image",
     cell: ({ row }) => <ImageColumn row={row} accessorKey="imageUrl" />,
   },
-
+  {
+    accessorKey: "title",
+    header: ({ column }) => <SortableColumn column={column} title="Title" />,
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => <DateColumn row={row} accessorKey="createdAt" />,
+  },
   {
     accessorKey: "createdAt",
     header: "Date Created",
